@@ -13,5 +13,6 @@ class Etudiant3a extends Model
         "3a_admission","3a_note_preselection","3a_presence"
     ];
     protected $primaryKey = "3a_cin";
+    protected $keyType = 'string';
     public $timestamps = false;
 }

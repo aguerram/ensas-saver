@@ -92,7 +92,7 @@ class NotesController extends Controller
         $year = $request->year;
         $filiere = $request->filiere;
         $alias = $year == 4 ? "4a_" : "3a_";
-
+        $instance = $year == 4 ?Etudiant4a::class:Etudiant3a::class;
         foreach ($notes as $key => $note) {
             if (in_array($key, [
                 "_token",
@@ -101,14 +101,11 @@ class NotesController extends Controller
             ]))
                 continue;
 
-
-            $instance = $year == 4 ?Etudiant4a::class:Etudiant3a::class;
-
             $et = $instance::find($key);
-
             $et["{$alias}note_preselection"] = $note;
             $et->save();
         }
+
         return back()->with("success","Vos données ont été enregistrées");
     }
 

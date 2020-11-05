@@ -14,6 +14,6 @@ class Etudiant4a extends Model
     ];
 
     protected $primaryKey = "4a_cin";
-
+    protected $keyType = 'string';
     public $timestamps = false;
 }
