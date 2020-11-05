@@ -19384,8 +19384,13 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 __webpack_require__(/*! C:\laragon\www\ensas-saver\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! C:\laragon\www\ensas-saver\resources\css\app.css */"./resources/css/app.css");
+=======
+__webpack_require__(/*! C:\Users\Oussidi_Mohamed\Desktop\ensas-saver\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Oussidi_Mohamed\Desktop\ensas-saver\resources\css\app.css */"./resources/css/app.css");
+>>>>>>> 947f7711ca0adf1d41e17c4619ef022527d1241d
 
 
 /***/ })
