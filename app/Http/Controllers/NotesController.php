@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Etudiant3a;
+use App\Models\Etudiant4a;
 use Illuminate\Http\Request;
 
 class NotesController extends Controller
@@ -10,32 +11,65 @@ class NotesController extends Controller
     public function index(Request $request, $year)
     {
         $filiere = $request->query("filiere");
+        $q = $request->query("q");
         if ($year != 3 && $year != 4) {
             abort(404);
         }
 
         if (!$filiere) {
-            return $this->listFiliereIndex($request,$year);
+            return $this->listFiliereIndex($request, $year);
         }
-        if(!$this->isFiliere($filiere))
-        {
+        if (!$this->isFiliere($filiere)) {
             abort(404);
         }
 
+        $alias = $year == 4 ? "4a_" : "3a_";
+        $model = $year == 4 ? Etudiant4a::class : Etudiant3a::class;
 
-        $etudiants = Etudiant3a::where("3a_presence",1)->paginate(15);
+        $qExist = $q && strlen(trim($q)) > 0;
 
+        $etudiants = $model::where([
+            "{$alias}presence" => 1,
+            "{$alias}filiere" => $filiere
+        ])
+            ->orderBy("{$alias}nom", "asc")
+            ->orderBy("{$alias}prenom", "asc")
+            ->when($qExist, function ($query) use ($q, $alias, $filiere) {
+                return $query
+                    ->where(function ($query) use ($q, $alias, $filiere) {
+                        $query
+                            ->where("{$alias}presence", 1)
+                            ->where("{$alias}filiere", $filiere);
+                    })
+                    ->where(function ($query) use ($q, $alias) {
+                        $query
+                            ->orWhere("{$alias}nom", "like", "%{$q}%")
+                            ->orWhere("{$alias}prenom", "like", "%{$q}%")
+                            ->orWhere("{$alias}massar", "like", "%{$q}%")
+                            ->orWhere("{$alias}email", "like", "%{$q}%");
+                    });
+
+            })
+            ->paginate(15);
+
+//        $etudiants->withPath("/notes/{$year}?filiere={$filiere}");
+
+        $filiereTitle = $this->getFilieres()[$filiere];
         return view("notes.notes_fill", [
-            "pageTitle" => "liste des candidats présents au concours d'accès en {$year}éme année : {$this->getFilieres()[$filiere]}",
-            "year"=>$year,
-            "etudiants"=>$etudiants
+            "pageTitle" => "liste des candidats présents au concours d'accès en {$year}éme année : {$filiereTitle}",
+            "year" => $year,
+            "etudiants" => $etudiants,
+            "filiereTitle" => $filiereTitle,
+            "alias" => $alias,
+            "link" => "/notes/{$year}?filiere={$filiere}",
+            "filiere" => $filiere
         ]);
     }
 
-    private function listFiliereIndex(Request $request,$year)
+    private function listFiliereIndex(Request $request, $year)
     {
         $filieres = $this->getFilieres();
-        return view("notes.list_fil",compact("filieres","year"));
+        return view("notes.list_fil", compact("filieres", "year"));
     }
 
     public function index3a(Request $request)
@@ -48,21 +82,51 @@ class NotesController extends Controller
         return $this->index($request, 4);
     }
 
+    public function update(Request $request)
+    {
+        $request->validate([
+            "year"=>"required|in:3,4",
+            "filiere"=>"required|in:F,P,D,T",
+        ]);
+        $notes = $request->all();
+        $year = $request->year;
+        $filiere = $request->filiere;
+        $alias = $year == 4 ? "4a_" : "3a_";
 
+        foreach ($notes as $key => $note) {
+            if (in_array($key, [
+                "_token",
+                "filiere",
+                "year",
+            ]))
+                continue;
+
+
+            $instance = $year == 4 ?Etudiant4a::class:Etudiant3a::class;
+
+            $et = $instance::find($key);
+
+            $et["{$alias}note_preselection"] = $note;
+            $et->save();
+        }
+        return back()->with("success","Vos données ont été enregistrées");
+    }
 
     public static function getFilieres()
     {
         return [
-            "F"=>"Génie Informatique",
-            "T"=>"Génie Télécoms",
-            "D"=>"Génie Industriel",
-            "P"=>"Génie Procédés"
+            "F" => "Génie Informatique",
+            "T" => "Génie Télécoms",
+            "D" => "Génie Industriel",
+            "P" => "Génie Procédés"
         ];
     }
+
     public static function isFiliere($fi)
     {
         $filieres = NotesController::getFilieres();
-        return array_key_exists($fi,$filieres);
+        return array_key_exists($fi, $filieres);
     }
+
 
 }
