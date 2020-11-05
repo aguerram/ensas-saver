@@ -2,3 +2,6 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 @import "notes.css";
+.bg-red-tr td{
+    background-color: #fdc4c4 !important;
+}
