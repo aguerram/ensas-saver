@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\NotesController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -19,13 +20,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         return view('dashboard');
     })->name('enrg4');
 
-    Route::get('/note3', function () {
-        return view('dashboard');
-    })->name('note3');
+    Route::get('/notes/3', [NotesController::class, "index3a"])->name('note3');
 
-    Route::get('/note4', function () {
-        return view('dashboard');
-    })->name('note4');
+    Route::get('/notes/4', [NotesController::class, "index4a"])->name('note4');
 });
 
 
