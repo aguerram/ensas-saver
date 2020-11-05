@@ -1,3 +1,4 @@
+@section('title', Request::is('enrg3') ? __('Enregistrement 3éme année') : __('Enregistrement 4éme année'))
 
 <x-app-layout>
     <x-slot name="header">

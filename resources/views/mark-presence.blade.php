@@ -1,7 +1,13 @@
+@php
+use \App\Http\Controllers\NotesController;
+    $isThirdYear = Request::is('enrg3') || Request::is('mark-presence3');
+@endphp
+@section('title', {{$isThirdYear? __('Enregistrement 3éme année') : __('Enregistrement 4éme année')}})
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ Request::is('enrg3') ? __('Enregistrement 3éme année') : __('Enregistrement 4éme année') }}
+            {{ $isThirdYear ? __('Enregistrement 3éme année') : __('Enregistrement 4éme année') }}
         </h2>
     </x-slot>
 
@@ -9,7 +15,7 @@
         <div
             class="xs:w-full sm:w-1/2 lg:w-1/2 flex bg-white xs:mx-6 my-6 sm:mx-auto shadow-lg rounded-lg overflow-hidden">
             <form class="mt-8 p-5 w-full"
-                action="{{Request::is('enrg3') ? route('mark-presence3') : route('mark-presence4')}}" method="POST">
+                action="{{$isThirdYear ? route('mark-presence3') : route('mark-presence4')}}" method="POST">
                 @if (isset($message))
                 @php
                 $color= $error ? "red":"green";
@@ -28,7 +34,7 @@
                 </div>
                 @endif
                 @csrf
-                <input id="user" value="{{Request::is('enrg3') ? $user['3a_cin'] : $user['4a_cin']}}" name="user"
+                <input id="user" value="{{$isThirdYear ? $user['3a_cin'] : $user['4a_cin']}}" name="user"
                     type="hidden" required>
 
                 <div class="box flex">
@@ -46,12 +52,12 @@
                         </div>
                         <div class="w-1/2">
                             <div>
-                                {{Request::is('enrg3') ? $user['3a_nom']." ".$user['3a_prenom'] : $user['4a_nom']." ".$user['4a_prenom']}}
+                                {{$isThirdYear ? $user['3a_nom']." ".$user['3a_prenom'] : $user['4a_nom']." ".$user['4a_prenom']}}
                             </div>
-                            <div class="pt-3">{{Request::is('enrg3') ? $user['3a_cin'] : $user['4a_cin']}}</div>
-                            <div class="pt-3">{{Request::is('enrg3') ? $user['3a_massar'] : $user['4a_massar']}}</div>
-                            <div class="pt-3">{{Request::is('enrg3') ? $user['3a_filiere'] : $user['4a_filiere']}}</div>
-                            <div class="pt-3">{{Request::is('enrg3') ? $user['3a_matricule'] : $user['4a_matricule']}}
+                            <div class="pt-3">{{$isThirdYear ? $user['3a_cin'] : $user['4a_cin']}}</div>
+                            <div class="pt-3">{{$isThirdYear ? $user['3a_massar'] : $user['4a_massar']}}</div>
+                            <div class="pt-3">{{$isThirdYear ?  NotesController::getFiliereByAbr($user['3a_filiere'])  : NotesController::getFiliereByAbr($user['4a_filiere']) }}</div>
+                            <div class="pt-3">{{$isThirdYear ? $user['3a_matricule'] : $user['4a_matricule']}}
                             </div>
                         </div>
 
@@ -64,7 +70,7 @@
                         class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
                         Marquer la présence
                     </button>
-                    <a href="{{Request::is('enrg3') ? route('enrg3') : route('enrg4')}}"
+                    <a href="{{$isThirdYear ? route('enrg3') : route('enrg4')}}"
                         class="mt-3 group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-black bg-gray-200 hover:bg-gray-300 text-black-800 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
                         Annuler
                     </a>

@@ -26,6 +26,12 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::post('/mark-presence3',[Enregistrement::class, "mark_presence3"])->name('mark-presence3');
     Route::post('/mark-presence4',[Enregistrement::class, "mark_presence4"])->name('mark-presence4');
+    Route::get('/mark-presence3',function () {
+        return redirect('enrg3');
+    });
+    Route::get('/mark-presence4',function () {
+        return redirect('enrg4');
+    });
 
 
     Route::get('/notes/3', [NotesController::class, "index3a"])->name('note3');

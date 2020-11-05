@@ -33,7 +33,7 @@ class Enregistrement extends Controller
     {
         $user = Etudiant3a::where('3a_matricule', '=', $request->user)->orWhere('3a_cin', "=", $request->user)->first();
         if ($user === null) {
-            return view("mark-presence")->with(["message" => "The user CIN or Matricule doesn't exist", "error" => true]);
+            return redirect("enrg3")->with(["message" => "The user CIN or Matricule doesn't exist", "error" => true]);
         } else {
             $user['3a_presence'] = 1;
             $user->save();
@@ -45,7 +45,7 @@ class Enregistrement extends Controller
     {
         $user = Etudiant4a::where('4a_matricule', '=', $request->user)->orWhere('4a_cin', "=", $request->user)->first();
         if ($user === null) {
-            return view("mark-presence")->with(["user" => $user, "message" => "The user CIN or Matricule doesn't exist", "error" => true]);
+            return redirect("enrg3")->with(["user" => $user, "message" => "The user CIN or Matricule doesn't exist", "error" => true]);
         } else {
             $user['4a_presence'] = 1;
             $user->save();
