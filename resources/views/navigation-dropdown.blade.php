@@ -35,7 +35,16 @@
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
-                <x-jet-dropdown align="right" width="48">
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+
+                    <x-jet-dropdown-link href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                    this.closest('form').submit();">
+                        {{ __('Logout') }}
+                    </x-jet-dropdown-link>
+                </form>
+                {{-- <x-jet-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                             <button
@@ -120,7 +129,7 @@
                             </x-jet-dropdown-link>
                         </form>
                     </x-slot>
-                </x-jet-dropdown>
+                </x-jet-dropdown> --}}
             </div>
 
             <!-- Hamburger -->
