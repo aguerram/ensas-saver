@@ -29,8 +29,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
 
     Route::get('/notes/3', [NotesController::class, "index3a"])->name('note3');
-
     Route::get('/notes/4', [NotesController::class, "index4a"])->name('note4');
+
+    Route::post('/notes_update', [NotesController::class, "update"])->name('notes_update');
 });
 
 

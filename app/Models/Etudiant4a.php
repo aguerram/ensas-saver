@@ -15,4 +15,8 @@ class Etudiant4a extends Model
     protected $fillable = [
         "4a_admission","4a_note_preselection","4a_presence"
     ];
+
+    protected $primaryKey = "4a_cin";
+    protected $keyType = 'string';
+    public $timestamps = false;
 }

@@ -22,13 +22,8 @@
     <list default="true" id="56a5af2d-55ff-41e8-9df4-5ef93cfd50e4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/NotesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/NotesController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Livewire/FilieresList.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Livewire/FilieresList.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Livewire/Header.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/Etudiant3a.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Etudiant3a.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/Etudiant4a.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Etudiant4a.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/livewire/filieres-list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/livewire/filieres-list.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/notes/list_fil.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/notes/list_fil.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/notes/notes_fill.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/notes/notes_fill.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -204,7 +199,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1604586187518</updated>
-      <workItem from="1604586189485" duration="8133000" />
+      <workItem from="1604586189485" duration="12670000" />
     </task>
     <servers />
   </component>
@@ -224,5 +219,11 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="339" y="162" key="run.anything.popup" timestamp="1604597884753">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1604597884753" />
   </component>
 </project>
