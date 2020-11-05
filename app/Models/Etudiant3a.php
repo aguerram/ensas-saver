@@ -14,4 +14,5 @@ class Etudiant3a extends Model
     protected $fillable = [
         "3a_admission","3a_note_preselection","3a_presence"
     ];
+
 }
