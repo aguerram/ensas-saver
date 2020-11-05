@@ -12,6 +12,13 @@ class NotesController extends Controller
     {
         $filiere = $request->query("filiere");
         $q = $request->query("q");
+        $order = $request->query("order");
+
+        if($order != "asc" && $order != "desc")
+        {
+            $order = null;
+        }
+
         if ($year != 3 && $year != 4) {
             abort(404);
         }
@@ -27,13 +34,22 @@ class NotesController extends Controller
         $model = $year == 4 ? Etudiant4a::class : Etudiant3a::class;
 
         $qExist = $q && strlen(trim($q)) > 0;
+        $orderExist = $order && strlen(trim($order)) > 0;
 
         $etudiants = $model::where([
             "{$alias}presence" => 1,
             "{$alias}filiere" => $filiere
         ])
-            ->orderBy("{$alias}nom", "asc")
-            ->orderBy("{$alias}prenom", "asc")
+            ->when(!$orderExist,function($query) use($alias){
+                $query
+                    ->orderBy("{$alias}nom", "asc")
+                    ->orderBy("{$alias}prenom", "asc");
+            },function($query) use($alias,$order){
+                $query
+                    ->orderBy("{$alias}note_preselection", $order)
+                    ->orderBy("{$alias}nom", "asc")
+                    ->orderBy("{$alias}prenom", "asc");
+            })
             ->when($qExist, function ($query) use ($q, $alias, $filiere) {
                 return $query
                     ->where(function ($query) use ($q, $alias, $filiere) {
@@ -55,14 +71,35 @@ class NotesController extends Controller
 //        $etudiants->withPath("/notes/{$year}?filiere={$filiere}");
 
         $filiereTitle = $this->getFilieres()[$filiere];
+        $link = "/notes/{$year}?filiere={$filiere}";
+        if($qExist)
+        {
+            $link.="&q=${q}";
+        }
+        $orderLink = $link;
+        if($orderExist)
+        {
+            if($order == "asc")
+            {
+                $orderLink.= "&order=desc";
+            }
+            else{
+                $orderLink.= "&order=asc";
+            }
+        }
+        else{
+            $orderLink.= "&order=asc";
+        }
+
         return view("notes.notes_fill", [
             "pageTitle" => "liste des candidats présents au concours d'accès en {$year}éme année : {$filiereTitle}",
             "year" => $year,
             "etudiants" => $etudiants,
             "filiereTitle" => $filiereTitle,
             "alias" => $alias,
-            "link" => "/notes/{$year}?filiere={$filiere}",
-            "filiere" => $filiere
+            "link" => $link,
+            "filiere" => $filiere,
+            "orderLink"=>$orderLink
         ]);
     }
 
