@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Etudiant3a;
 use Illuminate\Http\Request;
 
 class NotesController extends Controller
@@ -21,8 +22,13 @@ class NotesController extends Controller
             abort(404);
         }
 
+
+        $etudiants = Etudiant3a::where("3a_presence",1)->paginate(15);
+
         return view("notes.notes_fill", [
-            "pageTitle" => "liste des candidats présents au concours d'accès en {$year}éme année : {$this->getFilieres()[$filiere]}"
+            "pageTitle" => "liste des candidats présents au concours d'accès en {$year}éme année : {$this->getFilieres()[$filiere]}",
+            "year"=>$year,
+            "etudiants"=>$etudiants
         ]);
     }
 
@@ -44,7 +50,7 @@ class NotesController extends Controller
 
 
 
-    private function getFilieres()
+    public static function getFilieres()
     {
         return [
             "F"=>"Génie Informatique",
@@ -53,9 +59,9 @@ class NotesController extends Controller
             "P"=>"Génie Procédés"
         ];
     }
-    private function isFiliere($fi)
+    public static function isFiliere($fi)
     {
-        $filieres = $this->getFilieres();
+        $filieres = NotesController::getFilieres();
         return array_key_exists($fi,$filieres);
     }
 
