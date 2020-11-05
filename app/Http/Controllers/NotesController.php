@@ -155,6 +155,10 @@ class NotesController extends Controller
             "P" => "Génie Procédés"
         ];
     }
+    public static function getFiliereByAbr($abr)
+    {
+        return NotesController::getFilieres()[$abr];
+    }
 
     public static function isFiliere($fi)
     {

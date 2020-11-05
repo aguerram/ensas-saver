@@ -22,7 +22,13 @@
     <list default="true" id="56a5af2d-55ff-41e8-9df4-5ef93cfd50e4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/NotesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/NotesController.php" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/resources/css/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/notes/notes_fill.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/notes/notes_fill.blade.php" afterDir="false" />
+>>>>>>> 619ce284be3884062be5281aa7fafdea8e16c9ed
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -198,7 +204,11 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1604586187518</updated>
+<<<<<<< HEAD
       <workItem from="1604586189485" duration="15119000" />
+=======
+      <workItem from="1604586189485" duration="14121000" />
+>>>>>>> 619ce284be3884062be5281aa7fafdea8e16c9ed
     </task>
     <servers />
   </component>
