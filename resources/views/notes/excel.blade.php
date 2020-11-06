@@ -11,6 +11,8 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <form method="post" action="{{route("excel_export:post",["year"=>$year,"filiere"=>$filiere ])}}">
                     @csrf
+                    <input type="hidden" name="year" value="{{$year}}">
+                    <input type="hidden" name="filiere" value="{{$filiere}}">
                     <div class="shadow overflow-hidden sm:rounded-md">
                         <div class="px-4 py-5 bg-white sm:p-6">
                             <div class="grid grid-cols-6 gap-6">

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\EtudiantsExport;
 use App\Models\Etudiant3a;
 use App\Models\Etudiant4a;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class NotesController extends Controller
 {
@@ -165,7 +167,17 @@ class NotesController extends Controller
             "min_note"=>"required|numeric",
             "princ_list_count"=>"required|numeric",
             "wait_list_count"=>"required|numeric",
+            "year"=>"required|in:3,4",
+            "filiere" => "required|in:F,P,D,T"
         ]);
+
+        return Excel::download(new EtudiantsExport(
+            $request->year,
+            $request->filiere,
+            $request->min_note,
+            $request->princ_list_count,
+            $request->wait_list_count,
+        ),"etudiants.csv",\Maatwebsite\Excel\Excel::CSV);
     }
 
 
