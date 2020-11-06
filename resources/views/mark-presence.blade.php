@@ -2,7 +2,7 @@
 use \App\Http\Controllers\NotesController;
     $isThirdYear = Request::is('enrg3') || Request::is('mark-presence3');
 @endphp
-@section('title', {{$isThirdYear? __('Enregistrement 3éme année') : __('Enregistrement 4éme année')}})
+@section('title', $isThirdYear? __('Enregistrement 3éme année') : __('Enregistrement 4éme année'))
 
 <x-app-layout>
     <x-slot name="header">
@@ -18,7 +18,7 @@ use \App\Http\Controllers\NotesController;
                 action="{{$isThirdYear ? route('mark-presence3') : route('mark-presence4')}}" method="POST">
                 @if (isset($message))
                 @php
-                $color= $error ? "red":"green";
+                $color = $error ? "red":"green";
                 @endphp
                 <div class="bg-{{$color}}-100 p-5 w-full rounded mb-4">
                     <div class="flex justify-between">

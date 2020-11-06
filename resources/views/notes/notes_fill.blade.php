@@ -1,4 +1,4 @@
-@section('title', "Importer les notes")
+@section("title",$pageTitle)
 
 
 <x-app-layout>
@@ -58,7 +58,7 @@
                                   class="inline-block min-w-full shadow rounded-lg overflow-hidden">
                                 <div class="flex justify-between">
 
-                                    <a href="#"
+                                    <a href="{{ route("excel_export",["year"=>$year,"filiere"=>$filiere])  }}"
                                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                         Export Excel
                                     </a>

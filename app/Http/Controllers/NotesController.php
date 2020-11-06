@@ -87,7 +87,7 @@ class NotesController extends Controller
         }
 
         return view("notes.notes_fill", [
-            "pageTitle" => "liste des candidats présents au concours d'accès en {$year}éme année : {$filiereTitle}",
+            "pageTitle" => "Liste des candidats présents au concours d'accès en {$year}éme année : {$filiereTitle}",
             "year" => $year,
             "etudiants" => $etudiants,
             "filiereTitle" => $filiereTitle,
@@ -141,10 +141,33 @@ class NotesController extends Controller
         return back()->with("success", "Vos données ont été enregistrées");
     }
 
-    public function excel(Request $request)
+    public function excel(Request $request, $year, $filiere)
     {
-        echo "Excel";
+        if (!NotesController::isFiliere($filiere) || ($year != 3 && $year != 4)) {
+            return abort(404);
+        }
+        $alias = $year == 4 ? "4a_" : "3a_";
+        $model = $year == 4 ? Etudiant4a::class : Etudiant3a::class;
+
+        $filiereTitle = $this->getFilieres()[$filiere];
+
+
+        return view("notes.excel", [
+            "pageTitle" => "Export list des candidats {$year}éme année : {$filiereTitle}",
+            "year"=>$year,
+            "filiere"=>$filiere
+        ]);
     }
+
+    public function excel_export(Request $request)
+    {
+        $request->validate([
+            "min_note"=>"required|numeric",
+            "princ_list_count"=>"required|numeric",
+            "wait_list_count"=>"required|numeric",
+        ]);
+    }
+
 
     public static function getFilieres()
     {
@@ -155,6 +178,7 @@ class NotesController extends Controller
             "P" => "Génie Procédés"
         ];
     }
+
     public static function getFiliereByAbr($abr)
     {
         return NotesController::getFilieres()[$abr];

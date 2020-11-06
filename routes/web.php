@@ -37,7 +37,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/notes/3', [NotesController::class, "index3a"])->name('note3');
     Route::get('/notes/4', [NotesController::class, "index4a"])->name('note4');
 
-    Route::get('/excel/', [NotesController::class, "excel"])->name('note4');
+    Route::get('/excel/{year}/{filiere}', [NotesController::class, "excel"])->name('excel_export');
+    Route::post('/excel/{year}/{filiere}', [NotesController::class, "excel_export"])->name('excel_export:post');
 
     Route::post('/notes_update', [NotesController::class, "update"])->name('notes_update');
 });
