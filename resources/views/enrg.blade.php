@@ -1,16 +1,20 @@
-@section('title', Request::is('enrg3') ? __('Enregistrement 3éme année') : __('Enregistrement 4éme année'))
+@php
+$title=Request::is('enrg3') ? __('Enregistrement 3éme année') : __('Enregistrement 4éme année')
+@endphp
+
+@section('title', $title)
 
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ Request::is('enrg3') ? __('Enregistrement 3éme année') : __('Enregistrement 4éme année') }}
+            {{$title}}
         </h2>
     </x-slot>
 
     <div class="py-12">
         <div
             class="xs:w-full sm:w-1/2 lg:w-1/3 flex bg-white xs:mx-6 my-6 sm:mx-auto shadow-lg rounded-lg overflow-hidden">
-            <form class="mt-8 p-5 w-full "
+            <form class="mt-8 p-5 w-full"
                 action="{{Request::is('enrg3') ? route('enrg3_submit') : route('enrg4_submit')}}" method="POST">
                 @if (isset($message))
                 <div class="bg-red-100 p-5 w-full rounded mb-4">
@@ -28,7 +32,7 @@
                 @endif
                 @csrf
                 <div class="w-full">
-                    <input id="user" value="{{old('user')}}" aria-label="CIN or Maricule" name="user" type="text"
+                    <input id="user" value="{{old('user')}}" aria-label="CIN or Matricule" name="user" type="text"
                         required
                         class="appearance-none rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5"
                         placeholder="CIN or Maricule">

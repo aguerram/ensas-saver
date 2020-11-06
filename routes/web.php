@@ -39,6 +39,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::get('/excel/{year}/{filiere}', [NotesController::class, "excel"])->name('excel_export');
     Route::post('/excel/{year}/{filiere}', [NotesController::class, "excel_export"])->name('excel_export:post');
+    Route::get('/export',  function () {
+        return view('export-data');
+    })->name('export');
 
     Route::post('/notes_update', [NotesController::class, "update"])->name('notes_update');
 });

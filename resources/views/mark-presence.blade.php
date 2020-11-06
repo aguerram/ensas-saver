@@ -1,5 +1,5 @@
 @php
-use \App\Http\Controllers\NotesController;
+    use \App\Http\Controllers\NotesController;
     $isThirdYear = Request::is('enrg3') || Request::is('mark-presence3');
 @endphp
 @section('title', $isThirdYear? __('Enregistrement 3éme année') : __('Enregistrement 4éme année'))
