@@ -35,7 +35,7 @@ $title=Request::is('enrg3') ? __('Enregistrement 3éme année') : __('Enregistre
                     <input id="user" value="{{old('user')}}" aria-label="CIN or Matricule" name="user" type="text"
                         required
                         class="appearance-none rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5"
-                        placeholder="CIN or Maricule">
+                        placeholder="CIN or Matricule">
                 </div>
 
                 <div class="mt-6 w-full">

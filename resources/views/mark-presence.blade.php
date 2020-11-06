@@ -39,7 +39,7 @@
 
                 <div class="box flex">
                     <div class="w-1/3">
-                        <img src="https://dyl80ryjxr1ke.cloudfront.net/external_assets/hero_examples/hair_beach_v1785392215/original.jpeg"
+                        <img src="http://www.ensas.uca.ma/eEnsas/uploads/{{$isThirdYear ? "3a/".$user['3a_picture'] : "4a/".$user['4a_picture']}}"
                             class="img-res" alt="">
                     </div>
                     <div class="w-2/3 pl-5 flex">

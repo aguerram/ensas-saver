@@ -3,7 +3,7 @@
 
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-4">
             {{$pageTitle}}
         </h2>
         <livewire:filieres-list :year="$year"/>
@@ -56,7 +56,7 @@
                             @endif
                             <form action="{{route("notes_update")}}" method="POST"
                                   class="inline-block min-w-full shadow rounded-lg overflow-hidden">
-                                <div class="flex justify-between">
+                                <div class="flex justify-between mb-4">
 
                                     <a href="{{ route("excel_export",["year"=>$year,"filiere"=>$filiere])  }}"
                                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
