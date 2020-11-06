@@ -55,7 +55,8 @@ class EtudiantsExport implements FromCollection
             "{$alias}note_preselection",
         ])
             ->where([
-                "{$alias}filiere" => $this->filiere
+                "{$alias}filiere" => $this->filiere,
+                "{$alias}presence" => 1
             ])
             ->where("{$alias}note_preselection", ">=", $this->min_mark)
             ->orderBy("{$alias}note_preselection", "desc")
