@@ -28,8 +28,9 @@
                                 </div>
 
                                 <div class="col-span-6 sm:col-span-3">
-                                    <label for="last_name" class="block text-sm font-medium leading-5 text-gray-700">List
-                                        principal</label>
+                                    <label for="last_name" class="block text-sm font-medium leading-5 text-gray-700">
+                                        Liste principale
+                                    </label>
                                     <input id="last_name"
                                            value="4"
                                            type="number"
@@ -40,8 +41,9 @@
 
                                 <div class="col-span-6 sm:col-span-3">
                                     <label for="email_address"
-                                           class="block text-sm font-medium leading-5 text-gray-700">List
-                                        d'attende</label>
+                                           class="block text-sm font-medium leading-5 text-gray-700">
+                                        Liste d'attente
+                                    </label>
                                     <input id="email_address"
                                            value="6"
                                            type="number"
@@ -51,8 +53,16 @@
                                 </div>
                                 <div class="col-span-6">
                                     <button type="submit"
+                                            name="main"
+                                            value="main"
                                             class="inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
-                                        Enregistrer
+                                        Liste principale
+                                    </button>
+                                    <button type="submit"
+                                            name="wait"
+                                            value="wait"
+                                            class="inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
+                                        Liste d'attente
                                     </button>
                                 </div>
                 </form>

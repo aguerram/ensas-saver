@@ -156,28 +156,35 @@ class NotesController extends Controller
 
         return view("notes.excel", [
             "pageTitle" => "Export list des candidats {$year}éme année : {$filiereTitle}",
-            "year"=>$year,
-            "filiere"=>$filiere
+            "year" => $year,
+            "filiere" => $filiere
         ]);
     }
 
     public function excel_export(Request $request)
     {
         $request->validate([
-            "min_note"=>"required|numeric",
-            "princ_list_count"=>"required|numeric",
-            "wait_list_count"=>"required|numeric",
-            "year"=>"required|in:3,4",
+            "min_note" => "required|numeric",
+            "princ_list_count" => "required|numeric",
+            "wait_list_count" => "required|numeric",
+            "year" => "required|in:3,4",
             "filiere" => "required|in:F,P,D,T"
         ]);
 
+        $isMain = !!$request->main;
+        $filiereTitle = NotesController::getFiliereByAbr($request->filiere);
+        $fileName = $isMain ? "liste_principale" : "liste_attente";
+        $fileName .= "_{$request->year}_${filiereTitle}";
         return Excel::download(new EtudiantsExport(
             $request->year,
             $request->filiere,
             $request->min_note,
             $request->princ_list_count,
             $request->wait_list_count,
-        ),"etudiants.csv",\Maatwebsite\Excel\Excel::CSV);
+            $isMain
+        ), "$fileName.csv", \Maatwebsite\Excel\Excel::CSV);
+
+
     }
 
 

@@ -13,16 +13,19 @@ class EtudiantsExport implements FromCollection
     private $min_mark;
     private $princ_list_count;
     private $wait_list_count;
+    private $mainList;
 
-    public function __construct($year, $filiere, $min_mark, $princ_list_count, $wait_list_count)
+    public function __construct($year, $filiere, $min_mark, $princ_list_count, $wait_list_count, $mainList)
     {
         $this->year = $year;
         $this->filiere = $filiere;
         $this->min_mark = $min_mark;
         $this->princ_list_count = $princ_list_count;
         $this->wait_list_count = $wait_list_count;
+        $this->mainList = $mainList;
     }
-    public function headings() : array
+
+    public function headings(): array
     {
         return [
             "Nom",
@@ -35,6 +38,7 @@ class EtudiantsExport implements FromCollection
             "Note preselection",
         ];
     }
+
     public function collection()
     {
         $alias = $this->year == 4 ? "4a_" : "3a_";
@@ -55,7 +59,13 @@ class EtudiantsExport implements FromCollection
             ])
             ->where("{$alias}note_preselection", ">=", $this->min_mark)
             ->orderBy("{$alias}note_preselection", "desc")
-            ->take($this->princ_list_count)
+            ->orderBy("{$alias}note_bac", "desc")
+            ->when($this->mainList, function ($query) {
+                return $query->take($this->princ_list_count);
+            }, function ($query) {
+                return $query->take($this->wait_list_count)
+                    ->skip($this->princ_list_count);
+            })
             ->get();
     }
 }
