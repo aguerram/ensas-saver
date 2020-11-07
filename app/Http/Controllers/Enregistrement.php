@@ -74,7 +74,6 @@ class Enregistrement extends Controller
             "year" => "required",
             "filiere" => "required|in:F,P,D,T",
         ]);
-
         return Excel::download(new PresentExport(
             $request->year,
             $request->filiere

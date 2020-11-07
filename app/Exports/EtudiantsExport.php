@@ -4,10 +4,20 @@ namespace App\Exports;
 
 use App\Models\Etudiant3a;
 use App\Models\Etudiant4a;
+use Illuminate\Contracts\Support\Responsable;
+use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithCustomValueBinder;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class EtudiantsExport implements FromCollection
+class EtudiantsExport extends \PhpOffice\PhpSpreadsheet\Cell\StringValueBinder implements
+    FromCollection,
+    WithHeadings,
+    Responsable,
+    WithCustomValueBinder
 {
+    use Exportable;
+
     private $year;
     private $filiere;
     private $min_mark;
@@ -29,7 +39,7 @@ class EtudiantsExport implements FromCollection
     {
         return [
             "Nom",
-            "Prénom",
+            "Prenom",
             "CIN",
             "CNE",
             "Tele",
@@ -69,4 +79,5 @@ class EtudiantsExport implements FromCollection
             })
             ->get();
     }
+
 }
