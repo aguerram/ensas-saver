@@ -42,10 +42,14 @@ class Enregistrement extends Controller
         $user = Etudiant3a::where('3a_matricule', 'like', "{$request->user}%")
             ->orWhere('3a_cin', "like", "{$request->user}%")
             ->first();
+
+        $count = Etudiant3a::where('3a_matricule', 'like', "{$request->user}%")
+            ->orWhere('3a_cin', "like", "{$request->user}%")->count();
+
         if ($user === null) {
             return view("enrg")->with(["message" => "The user CIN or Matricule doesn't exist"]);
         } else {
-            return view("mark-presence")->with(["user" => $user]);
+            return view("mark-presence")->with(["user" => $user,"count"=>$count]);
         }
     }
 
