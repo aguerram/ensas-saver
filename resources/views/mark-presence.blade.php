@@ -46,6 +46,7 @@
                 <div class="box flex">
                     <div class="w-1/3">
                         <img
+                            crossorigin="anonymous"
                             src="http://www.ensas.uca.ma/eEnsas/uploads/{{$isThirdYear ? "3a/".$user['3a_picture'] : "4a/".$user['4a_picture']}}"
                             class="img-res" alt="">
                     </div>
