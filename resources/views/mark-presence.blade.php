@@ -36,7 +36,7 @@
                     </div>
                 @endif
                 @csrf
-                @if(isset($count))
+                @if(isset($count) && $count>1)
                     <p class="text-red-900">Il y a {{$count}} résultats similaires</p>
                 @endif
 
