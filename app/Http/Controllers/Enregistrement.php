@@ -18,11 +18,17 @@ class Enregistrement extends Controller
             "user" => "required",
         ]);
 
-        $user = Etudiant4a::where('4a_matricule', '=', $request->user)->orWhere('4a_cin', "=", $request->user)->first();
+        $user = Etudiant4a::where('4a_matricule', 'like', "{$request->user}%")
+            ->orWhere('4a_cin', "like", "{$request->user}%")
+            ->first();
+
+        $count =  Etudiant4a::where('4a_matricule', 'like', "{$request->user}%")
+            ->orWhere('4a_cin', "like", "{$request->user}%")->count();
+
         if ($user === null) {
             return view("enrg")->with(["message" => "The user CIN or Matricule doesn't exist"]);
         } else {
-            return view("mark-presence")->with(["user" => $user]);
+            return view("mark-presence")->with(["user" => $user,"count"=>$count]);
         }
     }
 
@@ -33,7 +39,9 @@ class Enregistrement extends Controller
             "user" => "required",
         ]);
 
-        $user = Etudiant3a::where('3a_matricule', '=', $request->user)->orWhere('3a_cin', "=", $request->user)->first();
+        $user = Etudiant3a::where('3a_matricule', 'like', "{$request->user}%")
+            ->orWhere('3a_cin', "like", "{$request->user}%")
+            ->first();
         if ($user === null) {
             return view("enrg")->with(["message" => "The user CIN or Matricule doesn't exist"]);
         } else {
