@@ -198,7 +198,7 @@ class NotesController extends Controller
             "A" => "Génie Aéronautique et Technologies de l'Espace",
         ];
         if ($year === 4) {
-            array_push($list, ["I" => "Intelligence artificielle"]);
+            $list += ["I" => "Intelligence artificielle"];
         }
         return $list;
     }
