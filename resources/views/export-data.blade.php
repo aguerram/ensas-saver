@@ -76,12 +76,9 @@ use \App\Http\Controllers\NotesController;
             </form>
         </div>
     </div>
+    <script>
+        function handleYearChange(el){
+            console.log(el.target.value)
+        }
+    </script>
 </x-app-layout>
-
-@push('scripts')
-<script>
-    function handleYearChange(el){
-        console.log(el.target.value)
-    }
-</script>
-@endpush
