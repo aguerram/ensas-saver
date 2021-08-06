@@ -22,13 +22,13 @@ class Enregistrement extends Controller
             ->orWhere('4a_cin', "like", "{$request->user}%")
             ->first();
 
-        $count =  Etudiant4a::where('4a_matricule', 'like', "{$request->user}%")
+        $count = Etudiant4a::where('4a_matricule', 'like', "{$request->user}%")
             ->orWhere('4a_cin', "like", "{$request->user}%")->count();
 
         if ($user === null) {
             return view("enrg")->with(["message" => "The user CIN or Matricule doesn't exist"]);
         } else {
-            return view("mark-presence")->with(["user" => $user,"count"=>$count]);
+            return view("mark-presence")->with(["user" => $user, "count" => $count]);
         }
     }
 
@@ -49,7 +49,7 @@ class Enregistrement extends Controller
         if ($user === null) {
             return view("enrg")->with(["message" => "The user CIN or Matricule doesn't exist"]);
         } else {
-            return view("mark-presence")->with(["user" => $user,"count"=>$count]);
+            return view("mark-presence")->with(["user" => $user, "count" => $count]);
         }
     }
 
@@ -84,8 +84,11 @@ class Enregistrement extends Controller
         //validation
         $request->validate([
             "year" => "required",
-            "filiere" => "required|in:F,P,D,T",
+            "filiere" => "required|in:F,P,D,T,I,A",
         ]);
+        if ($request->year === 3 && $request->filiere === 'I') {
+            return Redirect::back()->withErrors(['msg', 'Filière non exist.']);
+        }
         return Excel::download(new PresentExport(
             $request->year,
             $request->filiere

@@ -120,7 +120,7 @@ class NotesController extends Controller
     {
         $request->validate([
             "year" => "required|in:3,4",
-            "filiere" => "required|in:F,P,D,T",
+            "filiere" => "required|in:F,P,D,T,I,A",
         ]);
         $notes = $request->all();
         $year = $request->year;
@@ -168,7 +168,7 @@ class NotesController extends Controller
             "princ_list_count" => "required|numeric",
             "wait_list_count" => "required|numeric",
             "year" => "required|in:3,4",
-            "filiere" => "required|in:F,P,D,T"
+            "filiere" => "required|in:F,P,D,T,I,A"
         ]);
 
         $isMain = !!$request->main;

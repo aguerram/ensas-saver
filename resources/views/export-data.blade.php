@@ -80,7 +80,7 @@
     <script>
         const aiFiliere = document.querySelector('#_fi-I')
         function handleYearChange(el) {
-            switch (el.value) {
+            switch (+el.value) {
                 case 3:
                     aiFiliere.style.display = 'none';
                     break;
