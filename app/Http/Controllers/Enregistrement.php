@@ -93,7 +93,7 @@ class Enregistrement extends Controller
         return Excel::download(new PresentExport(
             $request->year,
             $request->filiere
-        ), "list_presence_$request->filiere_-$request->year.csv", \Maatwebsite\Excel\Excel::CSV);
+        ), "list_presence_$request->filiere-$request->year.csv", \Maatwebsite\Excel\Excel::CSV);
     }
 
 }
