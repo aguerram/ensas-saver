@@ -14,7 +14,7 @@ class FilieresList extends Component
     }
     public function render()
     {
-        $filieres = NotesController::getFilieres();
+        $filieres = NotesController::getFilieres($this->year);
         return view('livewire.filieres-list',[
             "filieres"=>$filieres,
             "year"=>$this->year
