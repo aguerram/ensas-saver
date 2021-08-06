@@ -35,7 +35,7 @@ use \App\Http\Controllers\NotesController;
 
                 <div class="shadow-sm w-full">
                     <div class="inline-block relative w-full">
-                        <select name="year"
+                        <select onchange="handleYearChange(this)" name="year"
                             class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                             <option disabled {{old('year')=='' ? 'selected':null}}>-- Choisir L'année --</option>
                             <option value="3" {{old('year')=='1' ? 'selected':null}}>3ème année</option>
@@ -55,7 +55,7 @@ use \App\Http\Controllers\NotesController;
                         <select name="filiere"
                             class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                             <option disabled selected>-- Choisir la Filière --</option>
-                            @foreach (NotesController::getFilieres() as $key=>$filiere)
+                            @foreach (NotesController::getFilieres(4) as $key=>$filiere)
                             <option {{old('filiere')==$key ? 'selected':null}} value="{{$key}}">{{$filiere}}</option>
                             @endforeach
                         </select>
@@ -77,3 +77,11 @@ use \App\Http\Controllers\NotesController;
         </div>
     </div>
 </x-app-layout>
+
+@push('scripts')
+<script>
+    function handleYearChange(el){
+        console.log(el.target.value)
+    }
+</script>
+@endpush
