@@ -1,8 +1,12 @@
 @foreach($filieres as $key=>$fil)
-<a @if(date('Y') === 2021 && $key === 'I') disabled @endif class="card" href="/notes/{{$year}}/?filiere={{$key}}">
+    @php
+        $disable = date('Y') === '2021' && $key === 'I';
+        $bg = $disable ?'bg-red-200':'bg-gray-200';
+    @endphp
+    <a @if($disable) disabled @endif class="card" href="/notes/{{$year}}/?filiere={{$key}}">
     <span
-        class="focus:bg-gray-400 inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+        class="focus:bg-gray-400 inline-block {{$bg}} rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
         {{$fil}}
     </span>
-</a>
+    </a>
 @endforeach
