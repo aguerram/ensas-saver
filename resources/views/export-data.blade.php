@@ -78,7 +78,7 @@
         </div>
     </div>
     <script>
-        const aiFiliere = document.querySelector('_fi-I')
+        const aiFiliere = document.querySelector('#_fi-I')
         function handleYearChange(el) {
             switch (el.value) {
                 case 3:
