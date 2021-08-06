@@ -73,7 +73,7 @@
                                 </tr>
                                 <tr>
                                     <th align="left">Filiere</th>
-                                    <td align="left">{{$isThirdYear ?  NotesController::getFiliereByAbr($user['3a_filiere'])  : NotesController::getFiliereByAbr($user['4a_filiere']) }}</td>
+                                    <td align="left">{{$isThirdYear ?  NotesController::getFiliereByAbr(3,$user['3a_filiere'])  : NotesController::getFiliereByAbr(4,$user['4a_filiere']) }}</td>
                                 </tr>
                                 <tr>
                                     <th align="left">Matricule</th>
