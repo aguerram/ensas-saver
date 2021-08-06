@@ -7,6 +7,7 @@ use App\Models\Etudiant3a;
 use App\Models\Etudiant4a;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
+use Redirect;
 
 class Enregistrement extends Controller
 {
