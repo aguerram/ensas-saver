@@ -27,7 +27,7 @@ class NotesController extends Controller
         if (!$filiere) {
             return $this->listFiliereIndex($request, $year);
         }
-        if (!$this->isFiliere($filiere)) {
+        if (!$this->isFiliere($year,$filiere)) {
             abort(404);
         }
 
@@ -72,7 +72,7 @@ class NotesController extends Controller
 
 //        $etudiants->withPath("/notes/{$year}?filiere={$filiere}");
 
-        $filiereTitle = $this->getFilieres()[$filiere];
+        $filiereTitle = $this->getFilieres($year)[$filiere];
         $link = "/notes/{$year}?filiere={$filiere}";
         if ($qExist) {
             $link .= "&q=${q}";
@@ -102,7 +102,7 @@ class NotesController extends Controller
 
     private function listFiliereIndex(Request $request, $year)
     {
-        $filieres = $this->getFilieres();
+        $filieres = $this->getFilieres($year);
         return view("notes.list_fil", compact("filieres", "year"));
     }
 
@@ -145,13 +145,13 @@ class NotesController extends Controller
 
     public function excel(Request $request, $year, $filiere)
     {
-        if (!NotesController::isFiliere($filiere) || ($year != 3 && $year != 4)) {
+        if (!NotesController::isFiliere($year,$filiere) || ($year != 3 && $year != 4)) {
             return abort(404);
         }
         $alias = $year == 4 ? "4a_" : "3a_";
         $model = $year == 4 ? Etudiant4a::class : Etudiant3a::class;
 
-        $filiereTitle = $this->getFilieres()[$filiere];
+        $filiereTitle = $this->getFilieres($year)[$filiere];
 
 
         return view("notes.excel", [
@@ -172,7 +172,7 @@ class NotesController extends Controller
         ]);
 
         $isMain = !!$request->main;
-        $filiereTitle = NotesController::getFiliereByAbr($request->filiere);
+        $filiereTitle = NotesController::getFiliereByAbr($request->year,$request->filiere);
         $fileName = $isMain ? "liste_principale" : "liste_attente";
         $fileName .= "_{$request->year}_${filiereTitle}";
         return Excel::download(new EtudiantsExport(
@@ -188,24 +188,29 @@ class NotesController extends Controller
     }
 
 
-    public static function getFilieres()
+    public static function getFilieres($year)
     {
-        return [
+        $list = [
             "F" => "Génie Informatique",
             "T" => "Génie Télécoms",
             "D" => "Génie Industriel",
-            "P" => "Génie Procédés"
+            "P" => "Génie Procédés",
+            "A" => "Génie Aéronautique et Technologies de l'Espace",
         ];
+        if ($year === 4) {
+            array_push($list, ["I" => "Intelligence artificielle"]);
+        }
+        return $list;
     }
 
-    public static function getFiliereByAbr($abr)
+    public static function getFiliereByAbr($year,$abr)
     {
-        return NotesController::getFilieres()[$abr];
+        return NotesController::getFilieres($year)[$abr];
     }
 
-    public static function isFiliere($fi)
+    public static function isFiliere($year,$fi)
     {
-        $filieres = NotesController::getFilieres();
+        $filieres = NotesController::getFilieres($year);
         return array_key_exists($fi, $filieres);
     }
 
