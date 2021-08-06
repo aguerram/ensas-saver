@@ -7,7 +7,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ $isThirdYear ? __('Enregistrement 3éme année') : __('Enregistrement 4éme année') }}
+            {{ $isThirdYear ? __('Enregistrement 3ème année') : __('Enregistrement 4ème année') }}
         </h2>
     </x-slot>
 
@@ -51,25 +51,40 @@
                             class="img-res" alt="">
                     </div>
                     <div class="w-2/3 pl-5 flex">
-                        <div class="w-1/2">
-                            <div><strong>Nom complet</strong></div>
-                            <div class="pt-3"><strong>CIN</strong></div>
-                            <div class="pt-3"><strong>CNE</strong></div>
-                            <div class="pt-3"><strong>Filiere</strong></div>
-                            <div class="pt-3"><strong>Matricule</strong></div>
-                        </div>
-                        <div class="w-1/2">
-                            <div>
-                                {{$isThirdYear ? $user['3a_nom']." ".$user['3a_prenom'] : $user['4a_nom']." ".$user['4a_prenom']}}
-                            </div>
-                            <div class="pt-3">{{$isThirdYear ? $user['3a_cin'] : $user['4a_cin']}}</div>
-                            <div class="pt-3">{{$isThirdYear ? $user['3a_massar'] : $user['4a_massar']}}</div>
-                            <div
-                                class="pt-3">{{$isThirdYear ?  NotesController::getFiliereByAbr($user['3a_filiere'])  : NotesController::getFiliereByAbr($user['4a_filiere']) }}</div>
-                            <div class="pt-3">{{$isThirdYear ? $user['3a_matricule'] : $user['4a_matricule']}}
-                            </div>
-                        </div>
-
+                        <table class="table-auto">
+                            <tbody>
+                                <tr>
+                                    <th align="left">Nom du candidat&nbsp;&nbsp;&nbsp;</th>
+                                    <td align="left">
+                                    {{$isThirdYear ? $user['3a_nom']." ".$user['3a_prenom'] : $user['4a_nom']." ".$user['4a_prenom']}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th align="left">CIN</th>
+                                    <td align="left">
+                                    {{$isThirdYear ? $user['3a_cin'] : $user['4a_cin']}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th align="left">CNE</th>
+                                    <td align="left">
+                                    {{$isThirdYear ? $user['3a_massar'] : $user['4a_massar']}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th align="left">Filiere</th>
+                                    <td align="left">{{$isThirdYear ?  NotesController::getFiliereByAbr($user['3a_filiere'])  : NotesController::getFiliereByAbr($user['4a_filiere']) }}</td>
+                                </tr>
+                                <tr>
+                                    <th align="left">Matricule</th>
+                                    <td align="left">{{$isThirdYear ? $user['3a_matricule'] : $user['4a_matricule']}}</td>
+                                </tr>
+                                <tr>
+                                    <th align="left">Etat</th>
+                                    <td align="left">{{$isThirdYear ? $user['3a_admission'] : $user['4a_admission']}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
 
                 </div>

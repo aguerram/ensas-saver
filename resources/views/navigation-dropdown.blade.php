@@ -17,18 +17,18 @@
                     </x-jet-nav-link>
 
                     <x-jet-nav-link href="{{ route('enrg3') }}" :active="request()->routeIs('enrg3')">
-                        Enregistrement 3éme année
+                        Enregistrement 3ème année
                     </x-jet-nav-link>
 
                     <x-jet-nav-link href="{{ route('enrg4') }}" :active="request()->routeIs('enrg4')">
-                        Enregistrement 4éme année
+                        Enregistrement 4ème année
                     </x-jet-nav-link>
 
                     <x-jet-nav-link href="{{ route('note3') }}" :active="request()->routeIs('note3')">
-                        Notes 3éme année
+                        Notes 3ème année
                     </x-jet-nav-link>
                     <x-jet-nav-link href="{{ route('note4') }}" :active="request()->routeIs('note4')">
-                        Notes 4éme année
+                        Notes 4ème année
                     </x-jet-nav-link>
                 </div>
             </div>

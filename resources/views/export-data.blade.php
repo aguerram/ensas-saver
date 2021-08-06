@@ -37,7 +37,7 @@ use \App\Http\Controllers\NotesController;
                     <div class="inline-block relative w-full">
                         <select name="year"
                             class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-                            <option disabled {{old('year')=='' ? 'selected':null}}>-- Chosir L'année --</option>
+                            <option disabled {{old('year')=='' ? 'selected':null}}>-- Choisir L'année --</option>
                             <option value="3" {{old('year')=='1' ? 'selected':null}}>3ème année</option>
                             <option value="4" {{old('year')=='2' ? 'selected':null}}>4ème année</option>
                         </select>
@@ -54,7 +54,7 @@ use \App\Http\Controllers\NotesController;
                     <div class="inline-block relative w-full">
                         <select name="filiere"
                             class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-                            <option disabled selected>-- Chosir La Filière --</option>
+                            <option disabled selected>-- Choisir la Filière --</option>
                             @foreach (NotesController::getFilieres() as $key=>$filiere)
                             <option {{old('filiere')==$key ? 'selected':null}} value="{{$key}}">{{$filiere}}</option>
                             @endforeach
