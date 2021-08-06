@@ -88,7 +88,7 @@ class Enregistrement extends Controller
             "filiere" => "required|in:F,P,D,T,I,A",
         ]);
         if (+$request->year === 3 && $request->filiere === 'I') {
-            return Redirect::back()->withErrors(['msg', 'Filière non exist.']);
+            return Redirect::back()->withErrors(["Filière 'Intelligence artificielle' non exist en 4e année."]);
         }
         return Excel::download(new PresentExport(
             $request->year,
