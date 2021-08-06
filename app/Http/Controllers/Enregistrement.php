@@ -86,13 +86,13 @@ class Enregistrement extends Controller
             "year" => "required",
             "filiere" => "required|in:F,P,D,T,I,A",
         ]);
-        if ($request->year === 3 && $request->filiere === 'I') {
+        if (+$request->year === 3 && $request->filiere === 'I') {
             return Redirect::back()->withErrors(['msg', 'Filière non exist.']);
         }
         return Excel::download(new PresentExport(
             $request->year,
             $request->filiere
-        ), "list_presence_$request->filiere.csv", \Maatwebsite\Excel\Excel::CSV);
+        ), "list_presence_$request->filiere_-$request->year.csv", \Maatwebsite\Excel\Excel::CSV);
     }
 
 }
